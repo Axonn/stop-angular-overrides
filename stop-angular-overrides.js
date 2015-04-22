@@ -42,8 +42,10 @@
     // proxy .filter calls to the new module
     m.filter = createProxyFn(m, m.filter, existingFiltersCheck);
 
-    // proxy .controller calls to the new module
-    m.controller = createProxyFn(m, m.controller, existingControllersCheck);
+    // proxy .controller calls to the new module and not the agoraaComponents module
+    if (name !== 'agoraaComponents') {
+      m.controller = createProxyFn(m, m.controller, existingControllersCheck);
+    }
 
     // proxy .directive calls to the new module
     m.directive = createProxyFn(m, m.directive, existingDirectivesCheck);
